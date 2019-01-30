@@ -1,0 +1,4 @@
+
+export const PEOPLE_INIT_LOAD = "PEOPLE_INIT_LOAD";
+
+export const PEOPLE_NEXT_PAGE = "PEOPLE_NEXT_PAGE";
