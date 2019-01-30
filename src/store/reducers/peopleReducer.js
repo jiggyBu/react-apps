@@ -1,4 +1,4 @@
-import { PEOPLE_INIT_LOAD, PEOPLE_NEXT_PAGE } from '../actionTypes';
+import { PEOPLE_INIT_LOAD, PEOPLE_CHANGE_PAGE } from '../actionTypes';
 
 const initState = {};
 
@@ -6,19 +6,20 @@ const peopleReducer = (state = initState, action) => {
 
     switch (action.type) {
         case PEOPLE_INIT_LOAD:
-            const { results, count, next, prev } = action.payload;
             console.log('loading inital people data');
             return {
                 ...state,
-                people: results,
-                count,
-                page: { next, prev }
+                people: action.payload.results,
+                count: action.payload.count,
+                page: { next: action.payload.next, previous: action.payload.previous }
             };
         
-        case PEOPLE_NEXT_PAGE:
-            console.log('loading next page');
+        case PEOPLE_CHANGE_PAGE:
+            console.log('loading page');
             return {
-                ...state
+                ...state,
+                people: action.payload.results,
+                page: { next: action.payload.next, previous: action.payload.previous }
             };
         default:
             return state;

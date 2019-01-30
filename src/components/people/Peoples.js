@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { peopleInitLoad } from '../../store/actions/peopleActions';
+import { peopleInitLoad, peopleChangePage } from '../../store/actions/peopleActions';
 import { connect } from 'react-redux';
 import People from './People';
 
@@ -10,7 +10,9 @@ class Peoples extends Component {
     }
 
     render() {
-        const { people, count, page } = this.props;
+
+        const { people, count, page, peopleChangePage } = this.props;
+        
         const peopleList = people && people.length ? (
             people.map((p, i) => {
                 return (
@@ -30,15 +32,15 @@ class Peoples extends Component {
                 </div>
                 <div className="row">
                     {
-                        page && page.prev ? (
-                            <button className="btn waves-effect waves-light" type="submit" name="action">
+                        page && page.previous ? (
+                            <button onClick={() => peopleChangePage(page.previous)} className="btn waves-effect waves-light" type="submit" name="action">
                                 Prev
                             </button>
                         ) : null
                     }
                     {
                         page && page.next ? (
-                            <button className="btn waves-effect waves-light" type="submit" name="action">
+                            <button onClick={() => peopleChangePage(page.next)} className="btn waves-effect waves-light" type="submit" name="action">
                                 Next
                             </button>
                         ) : null
@@ -59,7 +61,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        peopleInitLoad: () => dispatch(peopleInitLoad())
+        peopleInitLoad: () => dispatch(peopleInitLoad()),
+        peopleChangePage: (url) => dispatch(peopleChangePage(url))
     }
 }
 
