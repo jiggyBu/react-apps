@@ -30,7 +30,7 @@ class Peoples extends Component {
                 <div className="row">
                     {peopleList}
                 </div>
-                <div className="row">
+                <div className="row container">
                     {
                         page && page.previous ? (
                             <button onClick={() => peopleChangePage(page.previous)} className="btn waves-effect waves-light" type="submit" name="action">
