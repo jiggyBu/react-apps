@@ -17,7 +17,6 @@ export const starshipChangePage = (url) => {
     return (dispatch) => {
         return axios.get(url)
             .then(resp => {
-                console.log(resp);
                 dispatch({ type: STARSHIP_CHANGE_PAGE, payload: resp.data });
             })
             .catch(err => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { peopleInitLoad, peopleChangePage } from '../../store/actions/peopleActions';
 import { connect } from 'react-redux';
 import People from './People';
+import Pagination from '../navigation/Pagination';
 
 class Peoples extends Component {
     
@@ -30,22 +31,9 @@ class Peoples extends Component {
                 <div className="row">
                     {peopleList}
                 </div>
-                <div className="row container">
-                    {
-                        page && page.previous ? (
-                            <button onClick={() => peopleChangePage(page.previous)} className="btn waves-effect waves-light" type="submit" name="action">
-                                Prev
-                            </button>
-                        ) : null
-                    }
-                    {
-                        page && page.next ? (
-                            <button onClick={() => peopleChangePage(page.next)} className="btn waves-effect waves-light" type="submit" name="action">
-                                Next
-                            </button>
-                        ) : null
-                    }
-                </div>
+                
+                {/* PAGINATION */}
+                <Pagination page={page} pageAction={peopleChangePage} />
             </div>
         )
   }

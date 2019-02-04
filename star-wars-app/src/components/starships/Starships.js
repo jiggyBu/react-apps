@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { starshipChangePage, starshipInitLoad } from '../../store/actions/starshipActions';
 import { connect } from 'react-redux';
 import Starship from './Starship';
+import Pagination from '../navigation/Pagination';
 
 class Starships extends Component {
   
@@ -11,7 +12,7 @@ class Starships extends Component {
 
   render() {
 
-    const { starships, count, page } = this.props;
+    const { starships, count, page, starshipChangePage } = this.props;
     const strashipList = starships && starships.length ? (
       starships.map((s, i) => {
         return (
@@ -29,20 +30,7 @@ class Starships extends Component {
         <div className="row">
           {strashipList}
         </div>
-        <div className="row container">
-          { page && page.previous ? (
-                <button onClick={() => starshipChangePage(page.previous)} className="btn waves-effect waves-light" type="submit" name="action">
-                Prev
-              </button>
-            ) : null
-          }
-          { page && page.next ? (
-            <button onClick={() => starshipChangePage(page.next)} className="btn waves-effect waves-light" type="submit" name="action">
-                Next
-              </button>
-            ) : null
-          }
-        </div>
+        <Pagination page={page} pageAction={starshipChangePage} />
       </div>
     )
   }

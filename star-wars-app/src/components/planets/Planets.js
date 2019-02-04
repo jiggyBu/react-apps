@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { planetInitLoad, planetChangePage } from '../../store/actions/planetActions';
 import Planet from './Planet';
 import { connect } from 'react-redux';
+import Pagination from '../navigation/Pagination';
 
 class Planets extends Component {
 
@@ -31,22 +32,7 @@ class Planets extends Component {
             {planetList}
           </div>
 
-          <div className="row container">
-                    {
-                        page && page.previous ? (
-                            <button onClick={() => planetChangePage(page.previous)} className="btn waves-effect waves-light" type="submit" name="action">
-                                Prev
-                            </button>
-                        ) : null
-                    }
-                    {
-                        page && page.next ? (
-                            <button onClick={() => planetChangePage(page.next)} className="btn waves-effect waves-light" type="submit" name="action">
-                                Next
-                            </button>
-                        ) : null
-                    }
-                </div>
+          <Pagination page={page} pageAction={planetChangePage} />
       </div>
       
     )
