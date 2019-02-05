@@ -9,11 +9,11 @@ const Planet = ({ planet }) => {
                         {planet.name}
                     </span>
                     <ul className="collection blue-text"></ul>
-                    </div>
-                    <div className="card-action">
-                        <a href="#">
-                            View more
-                        </a>
+                </div>
+                <div className="card-action">
+                    <a href="#">
+                        View more
+                    </a>
                 </div>
             </div>
         </div>
