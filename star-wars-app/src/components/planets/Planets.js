@@ -9,7 +9,7 @@ class Planets extends Component {
   componentDidMount = () => {
     this.props.planetInitLoad();
   }
-  
+
   render() {
 
     const { planets, count, page, planetChangePage } = this.props;
