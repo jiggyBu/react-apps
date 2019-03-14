@@ -1,7 +1,6 @@
 import React from 'react';
 
 const People = ({ people }) => {
-
     return (
         <div className="col s12 m3">
             <div className="card blue-grey darken-1">
@@ -11,13 +10,10 @@ const People = ({ people }) => {
                     </span>
                     <ul className="collection blue-text">
                         <li className="collection-item">
-                            Height: {people.height}
+                            Eye color: {people.eyeColor}
                         </li>
                         <li className="collection-item">
-                            Mass: {people.mass}
-                        </li>
-                        <li className="collection-item">
-                            Birth year: {people.birth_year}
+                            Hair color: {people.hairColor}
                         </li>
                         <li className="collection-item">
                             Gender: {people.gender}

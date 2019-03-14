@@ -3,9 +3,10 @@ import { peopleInitLoad, peopleChangePage } from '../../store/actions/peopleActi
 import { connect } from 'react-redux';
 import People from './People';
 import Pagination from '../navigation/Pagination';
+import AddPeople from './AddPeople';
 
 class Peoples extends Component {
-    
+
     componentDidMount = () => {
         this.props.peopleInitLoad();
     }
@@ -31,8 +32,9 @@ class Peoples extends Component {
                 <div className="row">
                     {peopleList}
                 </div>
-                
-                {/* PAGINATION */}
+
+                <AddPeople />
+
                 <Pagination page={page} pageAction={peopleChangePage} />
             </div>
         )

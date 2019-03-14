@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Test /> matches the snapshot 1`] = `
+<div
+  className="Test"
+>
+  <header>
+    <h1>
+      Welcome to react
+    </h1>
+    <p
+      className="intro"
+    >
+      To get testing
+    </p>
+    <ul
+      className="t"
+    >
+      <li>
+        Test1
+      </li>
+      <li>
+        Test2
+      </li>
+      <li>
+        Test3
+      </li>
+    </ul>
+  </header>
+</div>
+`;
