@@ -4,7 +4,7 @@ public final class RequestUrls {
 	
 	public static final String PEOPLE = "/people";
 	public static final String PEOPLE_ADD = "/ppladd";
-
+	public static final String PEOPLE_REMOVE = "/pplremove";
 	
 	
 }

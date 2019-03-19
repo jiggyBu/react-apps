@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class AddPeople extends Component {
     state = {
-        id: null,
         name: null,
         eyeColor: null,
         hairColor: null,

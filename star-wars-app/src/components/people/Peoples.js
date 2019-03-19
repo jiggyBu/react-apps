@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { peopleInitLoad, peopleChangePage } from '../../store/actions/peopleActions';
+import { peopleInitLoad, peopleChangePage, peopleRemove } from '../../store/actions/peopleActions';
 import { connect } from 'react-redux';
 import People from './People';
 import Pagination from '../navigation/Pagination';
@@ -13,12 +13,12 @@ class Peoples extends Component {
 
     render() {
 
-        const { people, count, page, peopleChangePage } = this.props;
+        const { people, count, page, peopleChangePage, removePeople } = this.props;
         
         const peopleList = people && people.length ? (
             people.map((p, i) => {
                 return (
-                    <People people={p} key={i} />
+                    <People people={p} peopleRemove={peopleRemove} key={i} />
                 )
             })
         ) : (
@@ -52,7 +52,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         peopleInitLoad: () => dispatch(peopleInitLoad()),
-        peopleChangePage: (url) => dispatch(peopleChangePage(url))
+        peopleChangePage: (url) => dispatch(peopleChangePage(url)),
+        peopleRemove: (id) => dispatch(peopleRemove(id))
     }
 }
 

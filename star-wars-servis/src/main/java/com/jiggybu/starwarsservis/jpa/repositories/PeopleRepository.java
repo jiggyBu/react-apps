@@ -8,5 +8,6 @@ import com.jiggybu.starwarsservis.jpa.entities.People;
 
 @Repository
 public interface PeopleRepository extends JpaRepository<People, Long>, JpaSpecificationExecutor<People> {
-
+	
+	
 }

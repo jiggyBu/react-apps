@@ -48,4 +48,12 @@ public class PeopleService {
 		peopleRepository.save(newPeople);
 	}
 	
+	@Transactional
+	public void removePeople(Long id) {
+		
+		if (id != null)
+			peopleRepository.deleteById(id);
+	}
+	
+	
 }

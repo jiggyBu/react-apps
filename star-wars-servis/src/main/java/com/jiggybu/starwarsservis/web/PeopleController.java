@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiggybu.starwarsservis.jpa.entities.People;
@@ -55,6 +56,22 @@ public class PeopleController {
 		
 		return new ResponseEntity<People>(people, HttpStatus.CREATED);
 	}
+	
+	@CrossOrigin
+	@GetMapping(value=RequestUrls.PEOPLE_REMOVE)
+	public ResponseEntity<People> removePeople(@RequestParam Long id) {
+		
+		log.info("Removing person with id: {}", id);
+		
+		if (id == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		
+		peopleService.removePeople(id);
+		
+		log.info("Deleted people with id: {}", id);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	
 	
 	

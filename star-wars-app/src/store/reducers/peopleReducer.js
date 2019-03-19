@@ -1,4 +1,4 @@
-import { PEOPLE_INIT_LOAD, PEOPLE_CHANGE_PAGE, PEOPLE_ADD } from '../actionTypes';
+import { PEOPLE_INIT_LOAD, PEOPLE_CHANGE_PAGE, PEOPLE_ADD, PEOPLE_DELETE } from '../actionTypes';
 
 const initState = {};
 
@@ -23,6 +23,13 @@ const peopleReducer = (state = initState, action) => {
             return {
                 ...state,
                 people: [...state.people, action.payload]
+            }
+        case PEOPLE_DELETE:
+            console.log('Deleting person');
+            let people = state.people.filter(p => p.id !== action.payload);
+            return {
+                ...state,
+                people
             }
 
         default:
