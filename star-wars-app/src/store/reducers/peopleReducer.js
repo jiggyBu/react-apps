@@ -9,27 +9,30 @@ const peopleReducer = (state = initState, action) => {
             console.log('loading inital people data');
             return {
                 ...state,
-                people: action.payload
+                people: action.payload.people,
+                totalPages: action.payload.totalPages,
+                totalElements: action.payload.totalElements,
+                currentPage: action.payload.currentPage
             };
         
         case PEOPLE_CHANGE_PAGE:
             console.log('loading page');
             return {
                 ...state,
-                people: action.payload
+                people: action.payload.people,
+                currentPage: action.payload.currentPage
             };
         case PEOPLE_ADD:
-            console.log('Adding new people');
+            console.log('Adding new person');
             return {
                 ...state,
                 people: [...state.people, action.payload]
             }
         case PEOPLE_DELETE:
             console.log('Deleting person');
-            let people = state.people.filter(p => p.id !== action.payload);
             return {
                 ...state,
-                people
+                people: state.people.filter(p => p.id !== action.payload)
             }
 
         default:

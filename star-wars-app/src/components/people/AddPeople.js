@@ -7,7 +7,12 @@ class AddPeople extends Component {
         name: null,
         eyeColor: null,
         hairColor: null,
-        gender: 'Male'
+        gender: null
+    }
+
+    componentDidMount = () => {
+        // DIRTY !!
+        document.getElementById("gender").style.display = "block";
     }
 
     onChangeEv = (e) => {
@@ -18,8 +23,7 @@ class AddPeople extends Component {
 
     onSubmitEv = (e) => {
         e.preventDefault();
-        let id = Math.floor(Math.random() * 10000);
-        this.setState({ id });
+        this.setState({ id: 0 });
 
         // Send when formed
         setTimeout(() => {
@@ -32,17 +36,24 @@ class AddPeople extends Component {
       <div className="row">
         <form className="col s12" onSubmit={this.onSubmitEv}>
             <div className="row">
-                <div className="input-field col s4">
+                <div className="input-field col s3">
                     <input id="name" placeholder="Name" required name="name" type="text" className="validate" onChange={this.onChangeEv} />
                     <label htmlFor="Name"></label>
                 </div>
-                <div className="input-field col s4">
+                <div className="input-field col s3">
                     <input id="hairColor" placeholder="Hair color" name="hairColor" type="text" className="validate" onChange={this.onChangeEv} />
                     <label htmlFor="hairColor"></label>
                 </div>
-                <div className="input-field col s4">
+                <div className="input-field col s3">
                     <input id="eyeColor" name="eyeColor" placeholder="Eye color" type="text" className="validate" onChange={this.onChangeEv} />
                     <label htmlFor="eyeColor"></label>
+                </div>
+                <div className="input-field col s3" onChange={this.onChangeEv}>
+                    <select id="gender" name="gender">
+                        <option value="">--any--</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                    </select>
                 </div>
             </div>
                 {/* DROPDOWN - TEST FOR NOW ! */}

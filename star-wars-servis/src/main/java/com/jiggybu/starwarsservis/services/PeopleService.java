@@ -1,25 +1,25 @@
 package com.jiggybu.starwarsservis.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jiggybu.starwarsservis.beans.PeopleSearchRequest;
 import com.jiggybu.starwarsservis.jpa.entities.People;
 import com.jiggybu.starwarsservis.jpa.repositories.PeopleRepository;
 import com.jiggybu.starwarsservis.utils.SWSUtils;
 
 @Service
 public class PeopleService {
-
+	
 	@Autowired
 	private PeopleRepository peopleRepository;
 	
 	@Transactional(readOnly=true)
-	public List<People> findAllPeople() {
-		
-		List<People> peoples = peopleRepository.findAll();
+	public Page<People> findAllPeople(PeopleSearchRequest searchRequest) {
+				
+		Page<People> peoples = peopleRepository.findAll(searchRequest.getPageable());
 		
 		if (peoples == null) return null;
 		
@@ -27,7 +27,7 @@ public class PeopleService {
 	}
 	
 	@Transactional
-	public void addPeople(People people) {
+	public void addPerson(People people) {
 		
 		if (!SWSUtils.checkFieldIsNotNull(people)) return;
 		
@@ -49,7 +49,7 @@ public class PeopleService {
 	}
 	
 	@Transactional
-	public void removePeople(Long id) {
+	public void removePerson(Long id) {
 		
 		if (id != null)
 			peopleRepository.deleteById(id);

@@ -11,16 +11,20 @@ class Peoples extends Component {
         this.props.peopleInitLoad();
     }
 
+    loadMore = (page, numberOfElements) => {
+        if (numberOfElements > 0) {
+            page += 1;
+            return true;
+        }
+        return false;
+    }
+
     render() {
 
-        const { people, count, page, peopleChangePage, removePeople } = this.props;
-        
+        const { people, totalElements, totalPages, currentPage, peopleChangePage, removePeople } = this.props;
+
         const peopleList = people && people.length ? (
-            people.map((p, i) => {
-                return (
-                    <People people={p} peopleRemove={peopleRemove} key={i} />
-                )
-            })
+            people.map((p, i) => <People people={p} peopleRemove={peopleRemove} key={i} />)
         ) : (
             <div>
                 Loading star wars guys !
@@ -35,7 +39,7 @@ class Peoples extends Component {
 
                 <AddPeople />
 
-                <Pagination page={page} pageAction={peopleChangePage} />
+                <Pagination totalPages={totalPages} currentPage={currentPage} pageAction={peopleChangePage} />
             </div>
         )
   }
@@ -44,15 +48,16 @@ class Peoples extends Component {
 const mapStateToProps = (state) => {
     return {
         people: state.people.people,
-        count: state.people.count,
-        page: state.people.page
+        totalPages: state.people.totalPages,
+        totalElements: state.people.totalElements,
+        currentPage: state.people.currentPage
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         peopleInitLoad: () => dispatch(peopleInitLoad()),
-        peopleChangePage: (url) => dispatch(peopleChangePage(url)),
+        peopleChangePage: (page) => dispatch(peopleChangePage(page)),
         peopleRemove: (id) => dispatch(peopleRemove(id))
     }
 }
