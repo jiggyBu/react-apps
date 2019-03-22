@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { peopleAdd } from '../../store/actions/peopleActions';
 import { connect } from 'react-redux';
+import InputTypeText from '../utils/InputTypeText';
 
 class AddPeople extends Component {
     state = {
@@ -36,18 +37,10 @@ class AddPeople extends Component {
       <div className="row">
         <form className="col s12" onSubmit={this.onSubmitEv}>
             <div className="row">
-                <div className="input-field col s3">
-                    <input id="name" placeholder="Name" required name="name" type="text" className="validate" onChange={this.onChangeEv} />
-                    <label htmlFor="Name"></label>
-                </div>
-                <div className="input-field col s3">
-                    <input id="hairColor" placeholder="Hair color" name="hairColor" type="text" className="validate" onChange={this.onChangeEv} />
-                    <label htmlFor="hairColor"></label>
-                </div>
-                <div className="input-field col s3">
-                    <input id="eyeColor" name="eyeColor" placeholder="Eye color" type="text" className="validate" onChange={this.onChangeEv} />
-                    <label htmlFor="eyeColor"></label>
-                </div>
+                <InputTypeText name={'name'} onChangeEv={this.onChangeEv} placeholder={'Name'} rqd={true} />
+                <InputTypeText name={'hairColor'} onChangeEv={this.onChangeEv} placeholder={'Hair color'} />
+                <InputTypeText name={'eyeColor'} onChangeEv={this.onChangeEv} placeholder={'Eye color'} />
+
                 <div className="input-field col s3" onChange={this.onChangeEv}>
                     <select id="gender" name="gender">
                         <option value="">--any--</option>
@@ -56,8 +49,6 @@ class AddPeople extends Component {
                     </select>
                 </div>
             </div>
-                {/* DROPDOWN - TEST FOR NOW ! */}
-                <input type="hidden" value="Male" name="gender" id="gender" />
             <div className="row">
                 <button className="btn waves-effect waves-light" type="submit">
                     Submit
