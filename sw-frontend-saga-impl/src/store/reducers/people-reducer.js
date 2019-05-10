@@ -13,15 +13,19 @@ export default (state = initState, action) => {
 
     switch (type) {
         case peopleActionTypes.INIT_LOAD:
-            console.log(action.payload);
-            return {
-                ...state,
-                people: [...action.payload.people],
-                totalPages: action.payload.totalPages,
-                totalElements: action.payload.totalElements,
-                currentPage: action.payload.currentPage
-            };
-    
+            return Object.assign({}, state, {
+                people: action.data.people,
+                totalPages: action.data.totalPages,
+                totalElements: action.data.totalElements,
+                currentPage: action.data.currentPage
+            });
+
+        case peopleActionTypes.CHANGE_PAGE:
+            return Object.assign({}, state, {
+                people: action.data.people,
+                currentPage: action.data.currentPage
+            });
+
         default:
             return state;
     }
