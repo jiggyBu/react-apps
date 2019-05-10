@@ -30,6 +30,7 @@ function* changePage(page) {
 }
 
 function* addPerson(prsn) {
+    console.log(prsn);
     const person = yield PeopleService.addPerson(prsn);
 
     if (ApiUtils.statusCodeValidation(person)) {

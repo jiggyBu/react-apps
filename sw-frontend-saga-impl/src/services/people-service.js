@@ -18,16 +18,15 @@ class PeopleService {
             .then(resp => resp, () => []);
     }
 
-    addPerson(person) {
+    addPerson(people) {
         let id = Math.floor(Math.random() * 1000000);
-        let people = Object.assign({}, { id }, person);
-        
-        return ApiHelper.post(resourceUrlSufix.PEOPLE, { people })
+
+        return ApiHelper.post(resourceUrlSufix.ADD, people)
             .then(resp => resp, () => {});
     }
 
     removePersonById(id) {
-        return ApiHelper.remove(`${resourceUrlSufix.REMOVE}/${id}`)
+        return ApiHelper.remove(`${resourceUrlSufix.REMOVE}?id=${id.id}`)
             .then(resp => resp, (err) => console.error(err));
     }
 

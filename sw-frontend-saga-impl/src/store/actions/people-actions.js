@@ -9,12 +9,12 @@ export const changePage = (page) => ({
     page
 });
 
-export const add = (person) => ({
+export const addPerson = (people) => ({
     type: peopleActionTypes.REQ_ADD,
-    person
+    people
 });
 
-export const remove = (id) => ({
+export const removePersonById = (id) => ({
     type: peopleActionTypes.REQ_REMOVE,
     id
 });
