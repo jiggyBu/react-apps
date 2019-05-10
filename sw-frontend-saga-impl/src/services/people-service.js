@@ -26,7 +26,7 @@ class PeopleService {
     }
 
     removePersonById(id) {
-        return ApiHelper.remove(`${resourceUrlSufix.REMOVE}?id=${id.id}`)
+        return ApiHelper.get(`${resourceUrlSufix.REMOVE}?id=${id.id}`)
             .then(resp => resp, (err) => console.error(err));
     }
 

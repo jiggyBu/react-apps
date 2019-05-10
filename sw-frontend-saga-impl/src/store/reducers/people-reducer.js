@@ -26,6 +26,12 @@ export default (state = initState, action) => {
                 currentPage: action.data.currentPage
             });
 
+        case peopleActionTypes.REMOVE:
+            let people = state.people.filter(p => p.id !== action.id);
+            return Object.assign({}, state, {
+                people
+            });
+
         default:
             return state;
     }

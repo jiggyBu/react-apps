@@ -7,7 +7,7 @@ import org.springframework.data.domain.Sort.Direction;
 
 public class PeopleSearchRequest {
 
-	private static final int DEFAULT_PAGE_SIZE = 1;
+	private static final int DEFAULT_PAGE_SIZE = 3;
 	private static final Sort DEFAULT_SORT = new Sort(Direction.ASC, "name");
 	
 	private int page = 1;

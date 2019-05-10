@@ -44,11 +44,11 @@ function* addPerson(prsn) {
 }
 
 function* removePersonById(id) {
-    const personId = yield PeopleService.removePersonById(id);
-
-    if (ApiUtils.statusCodeValidation(personId)) {
+    const response = yield PeopleService.removePersonById(id);
+    
+    if (ApiUtils.statusCodeValidation(response)) {
         try {
-            yield put({ type: peopleActionTypes.REMOVE, id: personId.id });
+            yield put({ type: peopleActionTypes.REMOVE, id: response.data });
         
         } catch(e) {
             throw e;
