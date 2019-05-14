@@ -4,16 +4,12 @@ import { addPerson } from '../../store/actions/people-actions'
 import InputTypeText from '../misc/InputTypeText';
 
 class AddPerson extends React.PureComponent {
+
     state = {
         name: null,
         eyeColor: null,
         hairColor: null,
         gender: null
-    }
-
-    componentDidMount = () => {
-        // DIRTY !!
-        // document.getElementById("gender").style.display = "block";
     }
 
     onChangeEv = (e) => {
@@ -24,12 +20,7 @@ class AddPerson extends React.PureComponent {
 
     onSubmitEv = (e) => {
         e.preventDefault();
-        this.setState({ id: 0 });
-
-        // Send when formed
-        setTimeout(() => {
-            this.props.addPerson(this.state);
-        });
+        this.props.addPerson(this.state);
     }
   
     render() {

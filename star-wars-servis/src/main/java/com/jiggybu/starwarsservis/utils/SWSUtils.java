@@ -6,7 +6,7 @@ public class SWSUtils {
 
 	public static boolean checkFieldIsNotNull(People people) {
 		
-		if (people == null || people.getId() == null || people.getName() == null) {
+		if (people == null || people.getName() == null) {
 			return false;
 		}
 		

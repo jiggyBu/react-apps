@@ -19,7 +19,6 @@ import com.jiggybu.starwarsservis.data.PeopleRecord;
 import com.jiggybu.starwarsservis.jpa.entities.People;
 import com.jiggybu.starwarsservis.services.PeopleService;
 import com.jiggybu.starwarsservis.utils.RequestUrls;
-import com.jiggybu.starwarsservis.utils.SWSUtils;
 
 @RestController
 @RequestMapping("/sws")
@@ -48,16 +47,16 @@ public class PeopleController {
 	@CrossOrigin
 	@RequestMapping(value=RequestUrls.PEOPLE_ADD, method=RequestMethod.POST)
 	public ResponseEntity<People> addPeople(@RequestBody People people) {
-		
-		if (!SWSUtils.checkFieldIsNotNull(people)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		
+				
 		log.info("Adding new person to star wars world");
 		
-		peopleService.addPerson(people);
+		People newPerson = peopleService.addPerson(people);
 		
-		log.info("Added new person with name: {}", people.getName());				
+		if (newPerson == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		
-		return new ResponseEntity<People>(people, HttpStatus.CREATED);
+		log.info("Added new person with name: {}, and id: {}", newPerson.getName(), newPerson.getId());
+		
+		return new ResponseEntity<People>(newPerson, HttpStatus.CREATED);
 	}
 	
 	@CrossOrigin

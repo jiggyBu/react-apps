@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jiggybu.starwarsservis.beans.PeopleSearchRequest;
 import com.jiggybu.starwarsservis.jpa.entities.People;
 import com.jiggybu.starwarsservis.jpa.repositories.PeopleRepository;
-import com.jiggybu.starwarsservis.utils.SWSUtils;
 
 @Service
 public class PeopleService {
@@ -27,25 +26,25 @@ public class PeopleService {
 	}
 	
 	@Transactional
-	public void addPerson(People people) {
+	public People addPerson(People people) {
 		
-		if (!SWSUtils.checkFieldIsNotNull(people)) return;
-		
-		People newPeople = new People(people.getName());
+		People newPerson = new People(people.getName());
 		
 		if (people.getEyeColor() != null) {
-			newPeople.setEyeColor(people.getEyeColor());
+			newPerson.setEyeColor(people.getEyeColor());
 		}
 		
 		if (people.getHairColor() != null) {
-			newPeople.setHairColor(people.getHairColor());
+			newPerson.setHairColor(people.getHairColor());
 		}
 		
 		if (people.getGender() != null) {
-			newPeople.setGender(people.getGender());
+			newPerson.setGender(people.getGender());
 		}
 		
-		peopleRepository.save(newPeople);
+		peopleRepository.save(newPerson);
+		
+		return newPerson;
 	}
 	
 	@Transactional

@@ -1,5 +1,4 @@
 import ApiHelper from "./api-helper";
-import DataUtils from "../utils/data-utils";
 
 const resourceUrlSufix = {
     'PEOPLE'    : 'people',
@@ -21,15 +20,14 @@ class PeopleService {
 
     addPerson(person) {
         const { people } = person;
-        const id = DataUtils.generateRandomId();
-        const peopleObj = Object.assign({}, { id }, people);
 
-        return ApiHelper.post(resourceUrlSufix.ADD, peopleObj)
+        return ApiHelper.post(resourceUrlSufix.ADD, people)
             .then(resp => resp, () => {});
     }
 
     removePersonById(req) {
         const { id } = req;
+
         return ApiHelper.remove(`${resourceUrlSufix.REMOVE}?id=${id}`)
             .then(resp => resp, (err) => console.log(err));
     }
