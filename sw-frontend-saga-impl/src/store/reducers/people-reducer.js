@@ -25,11 +25,15 @@ export default (state = initState, action) => {
                 people: action.data.people,
                 currentPage: action.data.currentPage
             });
-
-        case peopleActionTypes.REMOVE:
-            let people = state.people.filter(p => p.id !== action.id);
+        
+        case peopleActionTypes.ADD:
             return Object.assign({}, state, {
-                people
+                people: [...state.people, action.person]
+            });
+        
+        case peopleActionTypes.REMOVE:
+            return Object.assign({}, state, {
+                people: state.people.filter(p => p.id !== action.id)
             });
 
         default:

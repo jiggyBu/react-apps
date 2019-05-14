@@ -7,11 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +31,7 @@ public class PeopleController {
 	private PeopleService peopleService;
 	
 	@CrossOrigin
-	@GetMapping(value=RequestUrls.PEOPLE)
+	@RequestMapping(value=RequestUrls.PEOPLE, method=RequestMethod.GET)	
 	public ResponseEntity<PeopleRecord> getAllPeople(@ModelAttribute PeopleSearchRequest searchRequest) {
 				
 		log.info("Getting all star wars people");
@@ -47,7 +46,7 @@ public class PeopleController {
 	}
 	
 	@CrossOrigin
-	@PostMapping(value=RequestUrls.PEOPLE_ADD)
+	@RequestMapping(value=RequestUrls.PEOPLE_ADD, method=RequestMethod.POST)
 	public ResponseEntity<People> addPeople(@RequestBody People people) {
 		
 		if (!SWSUtils.checkFieldIsNotNull(people)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -62,7 +61,7 @@ public class PeopleController {
 	}
 	
 	@CrossOrigin
-	@GetMapping(value=RequestUrls.PEOPLE_REMOVE)
+	@RequestMapping(value=RequestUrls.PEOPLE_REMOVE, method=RequestMethod.DELETE)
 	public ResponseEntity<Long> removePeople(@RequestParam Long id) {
 		
 		log.info("Removing person with id: {}", id);
