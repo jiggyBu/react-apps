@@ -19,16 +19,18 @@ class PeopleService {
             .then(resp => resp, () => []);
     }
 
-    addPerson(people) {
+    addPerson(person) {
+        const { people } = person;
         const id = DataUtils.generateRandomId();
-        const pplObj = Object.assign({}, { id }, people.people);
+        const peopleObj = Object.assign({}, { id }, people);
 
-        return ApiHelper.post(resourceUrlSufix.ADD, pplObj)
+        return ApiHelper.post(resourceUrlSufix.ADD, peopleObj)
             .then(resp => resp, () => {});
     }
 
-    removePersonById(id) {
-        return ApiHelper.remove(`${resourceUrlSufix.REMOVE}?id=${id.id}`)
+    removePersonById(req) {
+        const { id } = req;
+        return ApiHelper.remove(`${resourceUrlSufix.REMOVE}?id=${id}`)
             .then(resp => resp, (err) => console.log(err));
     }
 
