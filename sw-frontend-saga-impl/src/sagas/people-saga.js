@@ -1,63 +1,63 @@
 import PeopleService from '../services/people-service'
 import { put, takeEvery } from 'redux-saga/effects'
 import peopleActionTypes from '../store/action-types/people-action-types';
-import ApiUtils from '../utils/api-utils';
+import { RESP_ERROR_MSG } from '../constants/messages';
 
 function* getPeople() {
-    const people = yield PeopleService.getPeople();
-    
-    if (ApiUtils.statusCodeValidation(people)) {
-        try {
-            yield put({ type: peopleActionTypes.INIT_LOAD, data: people.data });
+    const data = yield PeopleService.getPeople();
 
-        } catch(e) {
-            throw e;
-        }
+    if (data == null) {
+        yield put({ type: peopleActionTypes.RESPONSE_ERROR, ...RESP_ERROR_MSG});
+    };
+
+    try {
+        yield put({ type: peopleActionTypes.SET_DATA, data });
+
+    } catch(e) {
+        throw e;
     }
 }
 
 function* changePage(page) {
-    const people = yield PeopleService.changePage(page);
+    const data = yield PeopleService.changePage(page);
 
-    if (ApiUtils.statusCodeValidation(people)) {
-        try {
-            yield put({ type: peopleActionTypes.CHANGE_PAGE, data: people.data });
+    if (data == null) {
+        yield put({ type: peopleActionTypes.RESPONSE_ERROR, ...RESP_ERROR_MSG});
+    };
 
-        } catch(e) {
-            throw e;
-        }
+    try {
+        yield put({ type: peopleActionTypes.SET_DATA, data });
+
+    } catch(e) {
+        throw e;
     }
 }
 
 function* addPerson(prsn) {
     const person = yield PeopleService.addPerson(prsn);
 
-    if (ApiUtils.statusCodeValidation(person)) {
-        try {
-            yield put({ type: peopleActionTypes.ADD, person: person.data });
+    try {
+        yield put({ type: peopleActionTypes.ADD_PERSON, person });
         
-        } catch(e) {
-            throw e;
-        }
+    } catch(e) {
+        throw e;
     }
 }
 
-function* removePersonById(id) {
-    const response = yield PeopleService.removePersonById(id);
+function* removePersonById(pId) {
+    const id = yield PeopleService.removePersonById(pId);
     
-    if (ApiUtils.statusCodeValidation(response)) {
-        try {
-            yield put({ type: peopleActionTypes.REMOVE, id: response.data });
+    try {
+        yield put({ type: peopleActionTypes.REMOVE_PERSON, id });
         
-        } catch(e) {
-            throw e;
-        }
+    } catch(e) {
+        throw e;
     }
 }
 
 export default function* peopleSaga() {
-    yield takeEvery(peopleActionTypes.REQ_INIT_LOAD, getPeople);
-    yield takeEvery(peopleActionTypes.REQ_CHANGE_PAGE, changePage);
+    yield takeEvery(peopleActionTypes.GET_DATA, getPeople);
+    yield takeEvery(peopleActionTypes.REQ_PAGE, changePage);
     yield takeEvery(peopleActionTypes.REQ_ADD, addPerson);
     yield takeEvery(peopleActionTypes.REQ_REMOVE, removePersonById);
 }

@@ -12,13 +12,13 @@ class App extends React.PureComponent {
 
   render() {
 
-    const { people, removePersonById } = this.props;
-
+    const { people, removePersonById, currentPage, totalPages, changePage, errorMsg } = this.props;
+    
     const peopleList = people && people.length ? people.map((p, i) => <div onClick={() => removePersonById(p.id)} key={i}>{p.name}</div>) : null
 
     return (
       <div className="App">
-        <h3>{`Page number: ${this.props.currentPage ? this.props.currentPage : 0}`}</h3>
+        <h3>{`Page number: ${currentPage ? currentPage : 0}`}</h3>
 
         <AddPerson />
 
@@ -26,7 +26,11 @@ class App extends React.PureComponent {
           {peopleList}
         </div>
 
-        <Pagination totalPages={this.props.totalPages} currentPage={this.props.currentPage} pageAction={this.props.changePage} />
+        {
+          errorMsg ? <h1>{errorMsg}</h1> : null
+        }
+
+        <Pagination totalPages={totalPages} currentPage={currentPage} pageAction={changePage} />
       </div>
     );
   }
@@ -37,6 +41,7 @@ const mapStateToProps = state => ({
   totalPages: state.peopleReducer.totalPages,
   totalElements: state.peopleReducer.totalElements,
   currentPage: state.peopleReducer.currentPage,
+  errorMsg: state.peopleReducer.errorMsg
 });
 
 const mapDispatchToProps = dispatch => ({

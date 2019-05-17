@@ -1,11 +1,11 @@
 import peopleActionTypes from "../action-types/people-action-types";
 
 export const initLoad = () => ({
-    type: peopleActionTypes.REQ_INIT_LOAD
+    type: peopleActionTypes.GET_DATA
 });
 
 export const changePage = (page) => ({
-    type: peopleActionTypes.REQ_CHANGE_PAGE,
+    type: peopleActionTypes.REQ_PAGE,
     page
 });
 

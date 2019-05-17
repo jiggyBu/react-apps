@@ -4,7 +4,8 @@ const initState = {
     people: [],
     totalPages: null,
     totalElements: null,
-    currentPage: null
+    currentPage: null,
+    errorMsg: null
 }
 
 export default (state = initState, action) => {
@@ -12,7 +13,7 @@ export default (state = initState, action) => {
     const { type } = action;
 
     switch (type) {
-        case peopleActionTypes.INIT_LOAD:
+        case peopleActionTypes.SET_DATA:
             return Object.assign({}, state, {
                 people: action.data.people,
                 totalPages: action.data.totalPages,
@@ -20,20 +21,19 @@ export default (state = initState, action) => {
                 currentPage: action.data.currentPage
             });
 
-        case peopleActionTypes.CHANGE_PAGE:
-            return Object.assign({}, state, {
-                people: action.data.people,
-                currentPage: action.data.currentPage
-            });
-        
-        case peopleActionTypes.ADD:
+        case peopleActionTypes.ADD_PERSON:
             return Object.assign({}, state, {
                 people: [...state.people, action.person]
             });
         
-        case peopleActionTypes.REMOVE:
+        case peopleActionTypes.REMOVE_PERSON:
             return Object.assign({}, state, {
                 people: state.people.filter(p => p.id !== action.id)
+            });
+        
+        case peopleActionTypes.RESPONSE_ERROR:
+            return Object.assign({}, state, {
+                errorMsg: action.msg
             });
 
         default:
